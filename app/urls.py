@@ -1,10 +1,13 @@
-from django.urls import path, include
-from .views import ProductView
-from rest_framework.routers import DefaultRouter
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("products/", ProductView.as_view({'get':'list'})),
-    path("products/create/", ProductView.as_view({'post':'create'})),
-    path("products/update/<int:pk>/", ProductView.as_view({'put':'update', 'patch':'partial_update'})),
-    path("products/delete/<int:pk>/", ProductView.as_view({'delete':'destroy'})),
+    path('products/', views.ProductList, name='product-list'),
+    path('product/<int:pk>/', views.ProductView, name='product-view'),
+    path('product/create/', views.ProductCreate, name='product-create'),
+    path('product/update/<int:pk>/', views.ProductUpdate, name='product-update'),
+    path('product/delete/<int:pk>/', views.ProductDelete, name='product-delete'),
+
+    path('products-list-create/', views.ProductListCreate, name='product-list-create'),
+    path('product-detail/<int:pk>/', views.ProductDetail, name='product-detail'),
 ]
